@@ -60,6 +60,7 @@ class FCPDWorkbench(Workbench):
         FreeCADGui.addPreferencePage(locator.resource("FCPDwb_pref.ui"), "FCPD")
 
         # statusWidget
+        import PySide
         self.statusWidget = PySide.QtWidgets.QLabel()
         Gui.getMainWindow().statusBar().addWidget(self.statusWidget)
 
