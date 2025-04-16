@@ -56,7 +56,7 @@ class FCPD_CommandLaunch:
         }
 
     def Activated(self):
-        if not fcpd.pdServer.isRunning():
+        if not fcpd.pdServer.isRunning:
             FreeCADGui.runCommand("FCPD_Run")
 
         if not fcpd.pdIsRunning():
@@ -115,8 +115,7 @@ class FCPD_CommandStop:
         return
 
     def IsActive(self):
-        # return FCPD.pdServer.isRunning
-        return True
+        return fcpd.pdServer.isRunning
 
 
 class FCPD_CommandAddInclude:
