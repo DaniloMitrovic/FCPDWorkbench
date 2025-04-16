@@ -48,6 +48,7 @@ class FCPDWorkbench(Workbench):
 
         self.commandList = [
             "FCPD_Launch",
+            "FCPD_Stop",
             "FCPD_AddInclude",
             "FCPD_AddPopulatedInclude",
         ]
@@ -58,6 +59,10 @@ class FCPDWorkbench(Workbench):
         FreeCADGui.addIconPath(locator.ICONS_PATH)
         FreeCADGui.addPreferencePage(locator.resource("FCPDwb_pref.ui"), "FCPD")
 
+        # statusWidget
+        self.statusWidget = PySide.QtWidgets.QLabel()
+        Gui.getMainWindow().statusBar().addWidget(self.statusWidget)
+
     def ContextMenu(self, recipient):
         if recipient == "tree":
             # add commands to the context menu
@@ -67,6 +72,9 @@ class FCPDWorkbench(Workbench):
 
     def GetClassName(self):
         return "Gui::PythonWorkbench"
+
+    def __del__(self):
+        self.statusWidget.deleteLater()
 
 
 Gui.addWorkbench(FCPDWorkbench())

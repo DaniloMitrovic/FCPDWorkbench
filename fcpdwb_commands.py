@@ -56,16 +56,17 @@ class FCPD_CommandLaunch:
         }
 
     def Activated(self):
-        if not fcpd.pdIsRunning():
+        if not fcpd.pdServer.isRunning():
             FreeCADGui.runCommand("FCPD_Run")
+
+        if not fcpd.pdIsRunning():
             fcpd.runPD()
         else:
             Log(QT_TRANSLATE_NOOP("FCPD_Launch", "Pure-Data is already running.\n"))
         return
 
     def IsActive(self):
-        # return FCPD.pdProcess is None or FCPD.pdProcess.poll() is not None
-        return True
+        return not fcpd.pdIsRunning()
 
 
 class FCPD_CommandRun:
